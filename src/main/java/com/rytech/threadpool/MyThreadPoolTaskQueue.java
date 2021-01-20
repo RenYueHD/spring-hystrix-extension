@@ -29,7 +29,7 @@ public class MyThreadPoolTaskQueue<T extends Runnable> extends LinkedBlockingQue
             this.executor = exec;
         } else {
             //重复绑定Executor大概率为调用方代码编写错误,为避免BUG产生,不应该对同一个Queue重复绑定Executor
-            throw new IllegalArgumentException("不允许[HelpEarlyBirdThreadPoolTaskQueue]重复绑定[HelpEarlyBirdThreadPoolExecutor]");
+            throw new IllegalArgumentException("不允许[MyThreadPoolTaskQueue]重复绑定[MyThreadPoolExecutor]");
         }
     }
 
@@ -57,7 +57,7 @@ public class MyThreadPoolTaskQueue<T extends Runnable> extends LinkedBlockingQue
     public boolean offer(Runnable runnable) {
         if (executor == null) {
             if (!loged) {
-                logger.warn("[HelpEarlyBirdThreadPoolTaskQueue]无法找到可用线程池,将运行在默认模式");
+                logger.warn("[MyThreadPoolTaskQueue]无法找到可用线程池,将运行在默认模式");
                 loged = true;
             }
             return super.offer(runnable);

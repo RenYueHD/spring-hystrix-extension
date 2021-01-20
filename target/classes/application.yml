@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 2
+      min-spare: 1
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 5      #Hystrix核心线程数,默认10
+      maximumSize: 20   #Hystrix最大线程数,默认10,只有在设置allowMaximumSizeToDivergeFromCoreSize=true后才能生效
+      allowMaximumSizeToDivergeFromCoreSize: true   #是否允许线程数动态调整,默认false
+      keepAliveTimeMinutes: 1   #非核心线程空闲多久后自动释放(单位分钟)
+      maxQueueSize: 10      #请求等待队列排队请求最大容量,默认-1为无容量,即不允许排队等待而直接降级/抛出异常
+      queueSizeRejectionThreshold: 5 #请求等待队列中的排队请求数达到此值后，请求将被降级/抛出异常,默认5,建议同时调整maxQueueSize值,若maxQueueSize=-1,则此属性不可用
